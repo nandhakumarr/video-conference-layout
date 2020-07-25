@@ -28,9 +28,9 @@ export default {
       const peerPinned = this.peerPinned && !this.stream.pin
       if (this.stream.pin) {
         return '100%'
-      } else if (peerPinned && this.count > 8) {
+      } else if (peerPinned && this.count >= 9) {
         return 200 / this.count + '%'
-      } else if (peerPinned && this.count < 8) {
+      } else if (peerPinned && this.count < 9) {
         return 100 / this.count + '%'
       } else if (peerPinned) {
         return 100 / this.count + '%'
@@ -52,13 +52,13 @@ export default {
       const peerPinned = this.peerPinned && !this.stream.pin
       if (this.stream.pin) {
         return '80%'
-      } else if (peerPinned && this.count > 9) {
+      } else if (peerPinned && this.count >= 9) {
         return '10%'
       } else if (peerPinned) {
         return '20%'
       } else if (this.count > 16) {
         return 100 / 5 + '%'
-      } else if (this.count > 8) {
+      } else if (this.count >= 9) {
         return 100 / 4 + '%'
       } else if (this.count > 6) {
         return 100 / 3 + '%'
