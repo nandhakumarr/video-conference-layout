@@ -1,14 +1,24 @@
 <template lang="pug">
 .stream(v-if="stream", :title="`${stream.name}: ${stream.id}`", :style="style", @click="$emit('pin', stream.id)", :class="{ pinned: stream.pin }")
-  small {{ stream.name }}
+  video(ref="video", autoplay, loop, @timeupdate="progress")
+   source(:src="video.sources[0]", type="video/mp4")
+  .desc
+   p {{ stream.name }}
+   p {{ elapsed }}s {{ video.title }}
 </template>
 
 <script>
+import videos from './videos'
+
 export default {
   props: {
     stream: { type: Object, default: null },
     count: { type: Number, default: 0 },
+    index: { type: Number, default: null },
     peerPinned: { type: Boolean, default: false },
+  },
+  data() {
+    return { elapsed: 0 }
   },
   computed: {
     style() {
@@ -79,6 +89,20 @@ export default {
         return '1 1 auto'
       }
     },
+    video() {
+      // return { sources: [''], title: '' }
+      return videos[this.index % videos.length]
+    },
+  },
+  watch: {
+    video() {
+      this.$refs.video.play()
+    },
+  },
+  methods: {
+    progress(s) {
+      this.elapsed = Math.round(this.$refs.video.currentTime)
+    },
   },
 }
 </script>
@@ -90,11 +114,35 @@ export default {
   min-width: 2rem
   width: auto
   height: auto
-  padding: 0.25rem
   &.pinned
     width: 80%
     height: 100%
     position: absolute
     left: 0
     top: 0
+
+.stream
+  position: relative
+  overflow: hidden
+  video
+    position: absolute
+    left: 0
+    right: 0
+    left: 0
+    bottom: 0
+    margin: auto
+    min-width: 100%
+    min-height: 100%
+    width: auto
+    height: auto
+  .desc
+    position: absolute
+    bottom: 0.25rem
+    left: 0.25rem
+    background: rgba(#000, 0.4)
+    color: white
+    padding: 0.25rem
+    p
+      font-size: 0.6rem
+      font-weight: 700
 </style>

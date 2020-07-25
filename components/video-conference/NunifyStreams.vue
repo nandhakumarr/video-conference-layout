@@ -1,7 +1,7 @@
 <template lang="pug">
 .nunify-streams(:class="{ pinned: hasPinned }")
   .fill-space(v-if="hasPinned")
-  stream(v-for="s in streams", :key="s.id", :stream="s", :count="streams.length", @pin="pin", :peerPinned="hasPinned")
+  stream(v-for="s, i in streams", :key="s.id", :stream="s", :count="streams.length", @pin="pin", :peerPinned="hasPinned", :index="i")
 </template>
 
 <script>
