@@ -1,6 +1,6 @@
 <template lang="pug">
 .stream(v-if="stream", :title="`${stream.name}: ${stream.id}`", :style="style", @click="$emit('pin', stream.id)", :class="{ pinned: stream.pin }")
-  video(ref="video", autoplay, loop, @timeupdate="progress")
+  video(ref="video", autoplay, loop, @timeupdate="progress", :muted="!stream.pin")
    source(:src="video.sources[0]", type="video/mp4")
   .desc
    p {{ stream.name }}
