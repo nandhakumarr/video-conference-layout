@@ -25,7 +25,9 @@ export default {
     },
     minHeight() {
       const peerPinned = this.peerPinned && !this.stream.pin
-      if (peerPinned && this.count > 8) {
+      if (this.stream.pin) {
+        return '100%'
+      } else if (peerPinned && this.count > 8) {
         return 100 / 8 + '%'
       } else if (peerPinned) {
         return 100 / this.count + '%'
