@@ -107,8 +107,16 @@ export default {
   },
   methods: {
     progress(s) {
-      this.elapsed = Math.round(this.$refs.video.currentTime)
+      const video = this.$refs.video
+      this.elapsed = video ? Math.round(video.currentTime) : 0
     },
+  },
+  beforeDestroy() {
+    const video = this.$refs.video
+    if (video) {
+      this.$refs.video.pause()
+      this.$refs.video.removeAttribute('src')
+    }
   },
 }
 </script>
