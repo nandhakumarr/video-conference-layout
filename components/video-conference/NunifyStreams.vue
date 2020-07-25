@@ -27,7 +27,6 @@ export default {
   },
   methods: {
     pin(id) {
-      console.log(id)
       this.streams.forEach((stream) => {
         Vue.set(stream, 'pin', stream.id === id)
       })

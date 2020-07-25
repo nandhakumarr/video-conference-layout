@@ -32,7 +32,7 @@ export default {
       } else if (peerPinned) {
         return 100 / this.count + '%'
       } else {
-        return 'auto'
+        return null
       }
     },
     maxHeight() {

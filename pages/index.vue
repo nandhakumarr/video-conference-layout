@@ -9,11 +9,12 @@
     button(@click="removeStream(selected)", :disabled="!selected") Remove
     button(@click="removeAllStreams", :disabled="streams.length <= 0") Remove All
     .separator
-    button Switch View
+    button(@click="unpinAll") Unpin All
 </template>
 
 <script>
 import f from 'faker'
+import Vue from 'vue'
 
 import NunifyStreams from '~/components/video-conference/NunifyStreams'
 export default {
@@ -37,6 +38,11 @@ export default {
     },
     removeAllStreams() {
       this.streams = []
+    },
+    unpinAll() {
+      this.streams.forEach((stream) => {
+        Vue.set(stream, 'pin', false)
+      })
     },
   },
 }
