@@ -98,6 +98,12 @@ export default {
     video() {
       this.$refs.video.play()
     },
+    'stream.pin': {
+      deep: true,
+      handler() {
+        this.$refs.video.play()
+      },
+    },
   },
   methods: {
     progress(s) {
