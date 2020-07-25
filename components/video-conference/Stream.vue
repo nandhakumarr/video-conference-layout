@@ -12,14 +12,42 @@ export default {
   computed: {
     style() {
       const backgroundColor = this.stream ? this.stream.color : 'transparent'
-      const { minWidth, maxWidth, flex } = this
-      return { minWidth, maxWidth, flex, backgroundColor }
+      const { minWidth, maxWidth, minHeight, maxHeight, height, flex } = this
+      return {
+        minWidth,
+        maxWidth,
+        minHeight,
+        maxHeight,
+        height,
+        flex,
+        backgroundColor,
+      }
+    },
+    minHeight() {
+      const peerPinned = this.peerPinned && !this.stream.pin
+      if (peerPinned && this.count > 8) {
+        return 100 / 8 + '%'
+      } else if (peerPinned) {
+        return 100 / this.count + '%'
+      } else {
+        return 'auto'
+      }
+    },
+    maxHeight() {
+      return this.minHeight
+    },
+    height() {
+      if (this.stream.pin) {
+        return '100%'
+      } else {
+        return 'auto'
+      }
     },
     minWidth() {
       const peerPinned = this.peerPinned && !this.stream.pin
       if (this.stream.pin) {
         return '80%'
-      } else if (peerPinned && this.count > 8) {
+      } else if (peerPinned && this.count > 9) {
         return '10%'
       } else if (peerPinned) {
         return '20%'
