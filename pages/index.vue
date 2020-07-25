@@ -34,7 +34,8 @@ export default {
       })
     },
     removeStream(selected) {
-      // this.streams = []
+      const index = this.streams.findIndex((stream) => stream.id === selected)
+      if (index > -1) this.streams.splice(index, 1)
     },
     removeAllStreams() {
       this.streams = []

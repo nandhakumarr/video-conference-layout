@@ -1,5 +1,6 @@
 <template lang="pug">
 .stream(v-if="stream", :title="`${stream.name}: ${stream.id}`", :style="style", @click="$emit('pin', stream.id)", :class="{ pinned: stream.pin }")
+  small {{ stream.name }}
 </template>
 
 <script>
@@ -28,7 +29,9 @@ export default {
       if (this.stream.pin) {
         return '100%'
       } else if (peerPinned && this.count > 8) {
-        return 100 / 8 + '%'
+        return 200 / this.count + '%'
+      } else if (peerPinned && this.count < 8) {
+        return 100 / this.count + '%'
       } else if (peerPinned) {
         return 100 / this.count + '%'
       } else {
@@ -55,7 +58,7 @@ export default {
         return '20%'
       } else if (this.count > 16) {
         return 100 / 5 + '%'
-      } else if (this.count > 9) {
+      } else if (this.count > 8) {
         return 100 / 4 + '%'
       } else if (this.count > 6) {
         return 100 / 3 + '%'
@@ -76,16 +79,6 @@ export default {
         return '1 1 auto'
       }
     },
-    alignSelf() {
-      const peerPinned = this.peerPinned && !this.stream.pin
-      if (this.stream.pin) {
-        return 'flex-start'
-      } else if (peerPinned) {
-        return 'flex-end'
-      } else {
-        return null
-      }
-    },
   },
 }
 </script>
@@ -97,6 +90,7 @@ export default {
   min-width: 2rem
   width: auto
   height: auto
+  padding: 0.25rem
   &.pinned
     width: 80%
     height: 100%
