@@ -23,7 +23,7 @@
     "eslint-plugin-nuxt": "^1.0.0",
     "eslint-plugin-prettier": "^3.1.4",
     "faker": "^4.1.0",
-    "lodash": "^4.17.19",
+    "lodash": "^4.17.21",
     "node-sass": "^4.14.1",
     "prettier": "^2.0.5",
     "pug": "^3.0.0",
